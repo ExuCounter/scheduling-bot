@@ -79,11 +79,8 @@ var checkUpcomingLessons = function () {
             todayLessons.map(function (lesson) {
                 var lessonTime = lesson.time;
                 var notificationTime = helpers_1.subtractMinutesFromFormattedTime(lessonTime, 5);
-                console.log(currentLesson);
-                console.log('Lesson Time' + lessonTime);
+                console.log('Current Time' + currentTime);
                 console.log('Notification Time' + notificationTime);
-                console.log(currentLesson.time !== lessonTime);
-                console.log(currentTime === notificationTime);
                 if (currentTime === notificationTime && currentLesson.time !== lessonTime) {
                     helpers_1.sendMessage("\u041F\u0430\u0440\u0430 \u0447\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 :*\n" + helpers_1.formatLesson(lesson));
                     currentLesson = __assign({}, lesson);

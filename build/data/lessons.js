@@ -35,28 +35,28 @@ exports.lessonsFirstWeek = {
     monday: [
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
-            time: '18:42',
+            time: '18:47',
             link: 'https://meet.google.com/lookup/ax2jmpong2',
             flat: '6.201',
             educator: 'Гамаюн В.П.',
         },
         {
             name: 'Тестирование комплексов IT-проектов ( Практика )',
-            time: '18:43',
+            time: '18:48',
             link: 'https://meet.google.com/lookup/fsftby66l7',
             flat: '6.110B',
             educator: 'Кирхар Н.В.',
         },
         {
             name: 'Специализированные компьютерные системы ( Практика )',
-            time: '18:44',
+            time: '18:49',
             link: 'не существует',
             flat: '5.112',
             educator: 'Гамаюн В.П.',
         },
         {
             name: 'Проектирование информационных систем ( Практика )',
-            time: '18:38',
+            time: '18:50',
             link: 'https://meet.google.com/lookup/gy4ic6wvey',
             flat: '6.211',
             educator: 'Рыбасова Н.О.',
