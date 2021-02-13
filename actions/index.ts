@@ -38,7 +38,7 @@ const showNextLesson = () => {
     todayLessons.find(lesson => {
       const currentTimeHours = +currentTime.substring(0, 2)
       const lessonTimeHours = +lesson.time.substring(0, 2)
-      return lessonTimeHours > currentTimeHours
+      return lessonTimeHours >= currentTimeHours
     })
 
   if (lesson) {
