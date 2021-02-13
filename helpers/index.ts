@@ -9,10 +9,11 @@ export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_
 /* DEV */
 // export const chatId = process.env.TEST_GROUP_CHAT_ID
 
-export const formatLesson = ({ name, time, link, educator }: Lesson): string => `
+export const formatLesson = ({ name, time, link, educator, subgroup }: Lesson): string => `
 Предмет: ${name}
 Время: ${time}
 Ссылка: ${link}
+Подгруппа: ${subgroup === 'both' ? '1 и 2' : subgroup}
 Преподаватель: ${educator}\n`
 
 export const getCurrentDate = () => {
@@ -62,7 +63,7 @@ export const sendUsersNotification = (users: string[]) => {
   const notificatedUsers = users.map(nickname => `<a href="@${nickname}">@${nickname}</a>`)
   setTimeout(() => {
     sendMessage(`${notificatedUsers}`, { parse_mode: 'HTML' })
-  }, 0)
+  }, 150)
 }
 
 export const onMessage = (callback: Function): void => {
