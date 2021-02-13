@@ -42,18 +42,23 @@ export const minutesToFormattedTime = (totalMinutes: number) => {
   return `${updatedTimeHours}:${updatedTimeMinutes < 10 ? '0' : ''}${updatedTimeMinutes}`
 }
 
-export const addMinutesToFormattedTime = (formattedTime: string, addedMinutes: number) => {
-  const [hours, minutes] = formattedTime.split(':').map(n => +n)
-  const totalMinutes = hours * 60 + minutes + addedMinutes
+export const formattedTimeToMinutes = (formattedTime: string) => {
+  const [hh, mm] = formattedTime.split(':').map(n => +n)
+  return hh * 60 + mm
+}
 
+export const addMinutesToFormattedTime = (formattedTime: string, addedMinutes: number) => {
+  const totalMinutes = formattedTimeToMinutes(formattedTime) + addedMinutes
   return minutesToFormattedTime(totalMinutes)
 }
 
 export const subtractMinutesFromFormattedTime = (formattedTime: string, substractedMinutes: number) => {
-  const [hours, minutes] = formattedTime.split(':').map(n => +n)
-  const totalMinutes = hours * 60 + minutes - substractedMinutes
-
+  const totalMinutes = formattedTimeToMinutes(formattedTime) - substractedMinutes
   return minutesToFormattedTime(totalMinutes)
+}
+
+export const getOffsetFromFormattedTimes = (t1: string, t2: string) => {
+  return formattedTimeToMinutes(t1) - formattedTimeToMinutes(t2)
 }
 
 export const sendMessage = (message: string, options?: any): void => {
