@@ -78,6 +78,11 @@ export const checkUpcomingLessons = () => {
       todayLessons.map(lesson => {
         const { time: lessonTime } = lesson
         const notificationTime = subtractMinutesFromFormattedTime(lessonTime, 5)
+        console.log(currentLesson)
+        console.log('Lesson Time' + lessonTime)
+        console.log('Notification Time' + notificationTime)
+        console.log(currentLesson.time !== lessonTime)
+        console.log(currentTime === notificationTime)
         if (currentTime === notificationTime && currentLesson.time !== lessonTime) {
           sendMessage(`Пара через 5 минут :*\n${formatLesson(lesson)}`)
           currentLesson = { ...lesson }

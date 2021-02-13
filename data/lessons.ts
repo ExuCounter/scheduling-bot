@@ -46,21 +46,21 @@ export const lessonsFirstWeek: Schedular = {
   monday: [
     {
       name: 'Специализированные компьютерные системы ( Лекция )',
-      time: '18:33',
+      time: '18:42',
       link: 'https://meet.google.com/lookup/ax2jmpong2',
       flat: '6.201',
       educator: 'Гамаюн В.П.',
     },
     {
       name: 'Тестирование комплексов IT-проектов ( Практика )',
-      time: '18:35',
+      time: '18:43',
       link: 'https://meet.google.com/lookup/fsftby66l7',
       flat: '6.110B',
       educator: 'Кирхар Н.В.',
     },
     {
       name: 'Специализированные компьютерные системы ( Практика )',
-      time: '18:37',
+      time: '18:44',
       link: 'не существует',
       flat: '5.112',
       educator: 'Гамаюн В.П.',
