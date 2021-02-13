@@ -5,6 +5,7 @@ var _a = require('date-fns-tz'), format = _a.format, zonedTimeToUtc = _a.zonedTi
 var isEven = require('is-even');
 var lessons_1 = require("../data/lessons");
 var bot_1 = require("../bot");
+var date_fns_tz_1 = require("date-fns-tz");
 // export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 exports.chatId = process.env.TEST_GROUP_CHAT_ID;
 var formatLesson = function (_a) {
@@ -13,7 +14,7 @@ var formatLesson = function (_a) {
 };
 exports.formatLesson = formatLesson;
 var getCurrentDate = function () {
-    var date = zonedTimeToUtc(new Date());
+    var date = date_fns_tz_1.utcToZonedTime(new Date(), 'Europe/Kiev');
     var currentWeekOfYear = format(date, 'w');
     var currentLocalDay = 'monday';
     // const currentLocalDay: localDayOfWeek = format(date, 'eeee').toLowerCase()
