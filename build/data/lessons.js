@@ -2,31 +2,61 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.lessonsSecondWeek = exports.lessonsFirstWeek = void 0;
 exports.lessonsFirstWeek = {
+    // monday: [
+    //   {
+    //     name: 'Специализированные компьютерные системы ( Лекция )',
+    //     time: '13:00',
+    //     link: 'https://meet.google.com/lookup/ax2jmpong2',
+    //     flat: '6.201',
+    //     educator: 'Гамаюн В.П.',
+    //   },
+    //   {
+    //     name: 'Тестирование комплексов IT-проектов ( Практика )',
+    //     time: '14:40',
+    //     link: 'https://meet.google.com/lookup/fsftby66l7',
+    //     flat: '6.110B',
+    //     educator: 'Кирхар Н.В.',
+    //   },
+    //   {
+    //     name: 'Специализированные компьютерные системы ( Практика )',
+    //     time: '16:20',
+    //     link: 'не существует',
+    //     flat: '5.112',
+    //     educator: 'Гамаюн В.П.',
+    //   },
+    //   {
+    //     name: 'Проектирование информационных систем ( Практика )',
+    //     time: '18:00',
+    //     link: 'https://meet.google.com/lookup/gy4ic6wvey',
+    //     flat: '6.211',
+    //     educator: 'Рыбасова Н.О.',
+    //   },
+    // ],
     monday: [
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
-            time: '13:00',
+            time: '18:33',
             link: 'https://meet.google.com/lookup/ax2jmpong2',
             flat: '6.201',
             educator: 'Гамаюн В.П.',
         },
         {
             name: 'Тестирование комплексов IT-проектов ( Практика )',
-            time: '14:40',
+            time: '18:35',
             link: 'https://meet.google.com/lookup/fsftby66l7',
             flat: '6.110B',
             educator: 'Кирхар Н.В.',
         },
         {
             name: 'Специализированные компьютерные системы ( Практика )',
-            time: '16:20',
+            time: '18:37',
             link: 'не существует',
             flat: '5.112',
             educator: 'Гамаюн В.П.',
         },
         {
             name: 'Проектирование информационных систем ( Практика )',
-            time: '18:00',
+            time: '18:38',
             link: 'https://meet.google.com/lookup/gy4ic6wvey',
             flat: '6.211',
             educator: 'Рыбасова Н.О.',

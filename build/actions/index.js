@@ -40,7 +40,7 @@ var showNextLesson = function () {
         todayLessons.find(function (lesson) {
             var currentTimeHours = +currentTime.substring(0, 2);
             var lessonTimeHours = +lesson.time.substring(0, 2);
-            return lessonTimeHours > currentTimeHours;
+            return lessonTimeHours >= currentTimeHours;
         });
     if (lesson) {
         helpers_1.sendMessage("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043F\u0430\u0440\u0430:" + helpers_1.formatLesson(lesson));

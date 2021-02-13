@@ -17,7 +17,9 @@ export const formatLesson = ({ name, time, link, flat, educator }: Lesson): stri
 export const getCurrentDate = () => {
   const date: Date = zonedTimeToUtc(new Date())
   const currentWeekOfYear: string = format(date, 'w')
-  const currentLocalDay: localDayOfWeek = format(date, 'eeee').toLowerCase()
+  const currentLocalDay: localDayOfWeek = 'monday'
+  // const currentLocalDay: localDayOfWeek = format(date, 'eeee').toLowerCase()
+
   const currentTime: string = format(date, 'HH:mm')
   const isEvenWeek: boolean = isEven(currentWeekOfYear)
   const currentWeek = isEvenWeek ? `Первая` : `Вторая`
