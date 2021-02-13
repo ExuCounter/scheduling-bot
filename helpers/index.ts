@@ -3,6 +3,7 @@ const isEven = require('is-even')
 
 import { Lesson, localDayOfWeek, lessonsSecondWeek, lessonsFirstWeek } from '../data/lessons'
 import { bot } from '../bot'
+import { utcToZonedTime } from 'date-fns-tz'
 
 // export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 export const chatId = process.env.TEST_GROUP_CHAT_ID
@@ -15,7 +16,7 @@ export const formatLesson = ({ name, time, link, flat, educator }: Lesson): stri
 Преподаватель: ${educator}\n`
 
 export const getCurrentDate = () => {
-  const date: Date = zonedTimeToUtc(new Date())
+  const date: Date = utcToZonedTime(new Date(), 'Europe/Kiev')
   const currentWeekOfYear: string = format(date, 'w')
   const currentLocalDay: localDayOfWeek = 'monday'
   // const currentLocalDay: localDayOfWeek = format(date, 'eeee').toLowerCase()
