@@ -5,14 +5,18 @@ import {
   getCurrentDate,
   getTodayLessons,
   subtractMinutesFromFormattedTime,
+  sendUsersNotification,
 } from '../helpers'
 import { Lesson } from '../data/lessons'
+import { firstGroupNicknames, secondGroupNicknames } from '../data/users'
 
 export enum Actions {
   currentWeekNumber = '/schedular_current_week_num',
   todaySchedular = '/schedular_today',
   nextLesson = '/schedular_next_lesson',
 }
+
+const UPDATE_TIME = 15 * 1000 // 15 seconds
 
 const showCurrentWeek = () => {
   const { currentWeek } = getCurrentDate()
@@ -36,8 +40,9 @@ const showNextLesson = () => {
   const lesson =
     todayLessons &&
     todayLessons.find(lesson => {
-      const currentTimeHours = +currentTime.substring(0, 2)
-      const lessonTimeHours = +lesson.time.substring(0, 2)
+      const currentTimeHours = +currentTime.substr(0, 2)
+      const lessonTimeHours = +lesson.time.substr(0, 2)
+
       return lessonTimeHours >= currentTimeHours
     })
 
@@ -61,13 +66,25 @@ export const handleActions = () => {
   })
 }
 
+type Groups = 'firstGroup' | 'secondGroup'
+
+type CurrentGroupsLessons = {
+  [x in Groups]: Lesson
+}
+
 export const checkUpcomingLessons = () => {
-  let currentLesson: Lesson = {
+  const emptyLesson: Lesson = {
     name: '',
     time: '',
     link: '',
     flat: '',
     educator: '',
+    subgroup: 'both',
+  }
+
+  const currentGroupsLessons: CurrentGroupsLessons = {
+    firstGroup: { ...emptyLesson },
+    secondGroup: { ...emptyLesson },
   }
 
   setInterval(() => {
@@ -78,13 +95,32 @@ export const checkUpcomingLessons = () => {
       todayLessons.map(lesson => {
         const { time: lessonTime } = lesson
         const notificationTime = subtractMinutesFromFormattedTime(lessonTime, 5)
-        console.log('Current Time' + currentTime)
-        console.log('Notification Time' + notificationTime)
-        if (currentTime === notificationTime && currentLesson.time !== lessonTime) {
-          sendMessage(`Пара через 5 минут :*\n${formatLesson(lesson)}`)
-          currentLesson = { ...lesson }
+
+        if (currentTime === notificationTime) {
+          if (lesson.subgroup === 1 && currentGroupsLessons.firstGroup.time !== lessonTime) {
+            sendMessage(`Через 5 минут пара у первой подгруппы :*\n${formatLesson(lesson)}`)
+            sendUsersNotification(firstGroupNicknames)
+
+            currentGroupsLessons.firstGroup = { ...lesson }
+          } else if (lesson.subgroup === 2 && currentGroupsLessons.secondGroup.time !== lessonTime) {
+            sendMessage(`Через 5 минут пара у второй подгруппы :*\n${formatLesson(lesson)}`)
+            sendUsersNotification(secondGroupNicknames)
+
+            currentGroupsLessons.secondGroup = { ...lesson }
+          } else if (
+            lesson.subgroup === 'both' &&
+            currentGroupsLessons.firstGroup.time !== lessonTime &&
+            currentGroupsLessons.secondGroup.time !== lessonTime
+          ) {
+            sendMessage(`Через 5 минут пара у всей группы :*\n${formatLesson(lesson)}`)
+            sendUsersNotification(firstGroupNicknames)
+            sendUsersNotification(secondGroupNicknames)
+
+            currentGroupsLessons.firstGroup = { ...lesson }
+            currentGroupsLessons.secondGroup = { ...lesson }
+          }
         }
       })
     }
-  }, 15 * 1000)
+  }, UPDATE_TIME)
 }

@@ -2,64 +2,38 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.lessonsSecondWeek = exports.lessonsFirstWeek = void 0;
 exports.lessonsFirstWeek = {
-    // monday: [
-    //   {
-    //     name: 'Специализированные компьютерные системы ( Лекция )',
-    //     time: '13:00',
-    //     link: 'https://meet.google.com/lookup/ax2jmpong2',
-    //     flat: '6.201',
-    //     educator: 'Гамаюн В.П.',
-    //   },
-    //   {
-    //     name: 'Тестирование комплексов IT-проектов ( Практика )',
-    //     time: '14:40',
-    //     link: 'https://meet.google.com/lookup/fsftby66l7',
-    //     flat: '6.110B',
-    //     educator: 'Кирхар Н.В.',
-    //   },
-    //   {
-    //     name: 'Специализированные компьютерные системы ( Практика )',
-    //     time: '16:20',
-    //     link: 'не существует',
-    //     flat: '5.112',
-    //     educator: 'Гамаюн В.П.',
-    //   },
-    //   {
-    //     name: 'Проектирование информационных систем ( Практика )',
-    //     time: '18:00',
-    //     link: 'https://meet.google.com/lookup/gy4ic6wvey',
-    //     flat: '6.211',
-    //     educator: 'Рыбасова Н.О.',
-    //   },
-    // ],
     monday: [
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
-            time: '19:00',
+            time: '13:00',
             link: 'https://meet.google.com/lookup/ax2jmpong2',
             flat: '6.201',
             educator: 'Гамаюн В.П.',
+            subgroup: 'both',
         },
         {
             name: 'Тестирование комплексов IT-проектов ( Практика )',
-            time: '19:01',
+            time: '14:40',
             link: 'https://meet.google.com/lookup/fsftby66l7',
             flat: '6.110B',
             educator: 'Кирхар Н.В.',
+            subgroup: 2,
         },
         {
             name: 'Специализированные компьютерные системы ( Практика )',
-            time: '19:02',
+            time: '16:20',
             link: 'не существует',
             flat: '5.112',
             educator: 'Гамаюн В.П.',
+            subgroup: 2,
         },
         {
             name: 'Проектирование информационных систем ( Практика )',
-            time: '19:03',
+            time: '18:00',
             link: 'https://meet.google.com/lookup/gy4ic6wvey',
             flat: '6.211',
             educator: 'Рыбасова Н.О.',
+            subgroup: 2,
         },
     ],
     tuesday: [],
@@ -70,6 +44,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/fecc4njrdd',
             flat: '6.201',
             educator: 'Боровик В.М.',
+            subgroup: 'both',
         },
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
@@ -77,6 +52,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/chummpwhay',
             flat: '6.302',
             educator: 'Савченко А.С.',
+            subgroup: 'both',
         },
         {
             name: 'Интелектуальный анализ данных ( Лекция )',
@@ -84,6 +60,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/dnz56d5rjr',
             flat: '6.202',
             educator: 'Куклинский А.В.',
+            subgroup: 'both',
         },
     ],
     thursday: [
@@ -93,6 +70,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/ccspc3bpcu',
             flat: '8.1301',
             educator: 'Юрченко С.О.',
+            subgroup: 'both',
         },
         {
             name: 'Распределительные та облачные вычисления ( Практика )',
@@ -100,6 +78,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/blmwq7ek6t',
             flat: '6.206',
             educator: 'Шевченко О.П.',
+            subgroup: 2,
         },
         {
             name: 'Компьютерные сети ( Практика )',
@@ -107,6 +86,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/h454lu27pf',
             flat: '6.204',
             educator: 'Холявкина Т.В.',
+            subgroup: 2,
         },
     ],
     friday: [
@@ -116,6 +96,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/blmwq7ek6t',
             flat: '6.201',
             educator: 'Шевченко О.П.',
+            subgroup: 'both',
         },
         {
             name: 'Тестирование комплексов IT проектов ( Лекция )',
@@ -123,6 +104,7 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/gr74gcatji',
             flat: '6.201',
             educator: 'Кирхар Н.В.',
+            subgroup: 'both',
         },
     ],
 };
@@ -134,6 +116,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/ax2jmpong2',
             flat: '6.201',
             educator: 'Гамаюн В.П.',
+            subgroup: 'both',
         },
         {
             name: 'Специализированные компьютерные системы ( Практика )',
@@ -141,6 +124,7 @@ exports.lessonsSecondWeek = {
             link: 'не существует',
             flat: '5.112',
             educator: 'Гамаюн В.П.',
+            subgroup: 2,
         },
     ],
     tuesday: [],
@@ -151,6 +135,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/gr74gcatji',
             flat: '6.201',
             educator: 'Кирхар Н.В.',
+            subgroup: 'both',
         },
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
@@ -158,6 +143,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/chummpwhay',
             flat: '6.302',
             educator: 'Савченко А.С.',
+            subgroup: 'both',
         },
         {
             name: 'Проектирование информационных систем ( Лекция )',
@@ -165,6 +151,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/dnz56d5rjr',
             flat: '6.202',
             educator: 'Куклинский А.В.',
+            subgroup: 'both',
         },
     ],
     thursday: [
@@ -174,6 +161,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/fsftby66l7',
             flat: '6.110A',
             educator: 'Кирхар Н.В.',
+            subgroup: 2,
         },
         {
             name: 'Компьютерные сети ( Практика )',
@@ -181,6 +169,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/h454lu27pf',
             flat: '6.204',
             educator: 'Холявкина Т.В.',
+            subgroup: 2,
         },
         {
             name: 'Интелектуальный анализ данных ( Лекция )',
@@ -188,6 +177,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/dnz56d5rjr',
             flat: '6.110В',
             educator: 'Куклинский А.В.',
+            subgroup: 'both',
         },
     ],
     friday: [
@@ -197,6 +187,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/blmwq7ek6t',
             flat: '6.201',
             educator: 'Шевченко О.П.',
+            subgroup: 'both',
         },
         {
             name: 'Тестирование комплексов IT проектов ( Лекция )',
@@ -204,6 +195,7 @@ exports.lessonsSecondWeek = {
             link: 'https://meet.google.com/lookup/gr74gcatji',
             flat: '6.201',
             educator: 'Кирхар Н.В.',
+            subgroup: 'both',
         },
     ],
 };
