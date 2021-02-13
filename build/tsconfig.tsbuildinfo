@@ -157,7 +157,7 @@
         "affectsGlobalScope": true
       },
       "../data/lessons.ts": {
-        "version": "b15d7546eb31c9077da6343d9efc14c8f07c2e9d0bf114a7cfeed7ca5185915d",
+        "version": "d56fe075fc039d66ae126729285bd51a2230a03c05ccf06c123873c2b9c098e8",
         "signature": "8fe4d0cc8a837776befb531f859b719005e1f1d06b2ff5fc3050d05744a75996",
         "affectsGlobalScope": false
       },
@@ -407,8 +407,8 @@
         "affectsGlobalScope": false
       },
       "../helpers/index.ts": {
-        "version": "2b88c1eb03d436dd274b08dd325151e8cf79a94a9f28835f44042bd24d9e5e64",
-        "signature": "f813088213a7e655160fe69e7f939d0707368cd087b42faa051787cdb580db5f",
+        "version": "c24c3995ce4cc67b2862d592abb5bfb5b460f833faf7a64ee820943a57f00a17",
+        "signature": "dd6a5b3777a0111d4cd41b9c54b23b65b073b3d40f89a6152992b8bfbe388b84",
         "affectsGlobalScope": false
       },
       "../data/users.ts": {

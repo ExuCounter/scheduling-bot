@@ -4,10 +4,11 @@ const isEven = require('is-even')
 import { Lesson, localDayOfWeek, lessonsSecondWeek, lessonsFirstWeek } from '../data/lessons'
 import { bot } from '../bot'
 
-export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
+/* PRODUCT */
+// export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 
 /* DEV */
-// export const chatId = process.env.TEST_GROUP_CHAT_ID
+export const chatId = process.env.TEST_GROUP_CHAT_ID
 
 export const formatLesson = ({ name, time, link, educator, subgroup }: Lesson): string => `
 Предмет: ${name}
