@@ -16,9 +16,10 @@ var helpers_1 = require("../helpers");
 var users_1 = require("../data/users");
 var Actions;
 (function (Actions) {
-    Actions["currentWeekNumber"] = "/schedular_current_week_num";
-    Actions["todaySchedular"] = "/schedular_today";
-    Actions["nextLesson"] = "/schedular_next_lesson";
+    Actions["currentWeekNumber"] = "/sch_current_week_number";
+    Actions["todaySchedular"] = "/sch_today";
+    Actions["nextLessonFirstGroup"] = "/sch_next_lesson_first_group";
+    Actions["nextLessonSecondGroup"] = "/sch_next_lesson_second_group";
 })(Actions = exports.Actions || (exports.Actions = {}));
 var UPDATE_TIME = 15 * 1000; // 15 seconds
 var showCurrentWeek = function () {
@@ -35,20 +36,28 @@ var showTodaySchedular = function () {
         helpers_1.sendMessage("\u0420\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u043D\u0435\u0442\u0443 - \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u0432\u044B\u0445\u043E\u0434\u043D\u043E\u0439.");
     }
 };
-var showNextLesson = function () {
+var showNextLesson = function (subgroup) {
     var currentTime = helpers_1.getCurrentDate().currentTime;
     var todayLessons = helpers_1.getTodayLessons();
-    var lesson = todayLessons &&
-        todayLessons.find(function (lesson) {
-            var currentTimeHours = +currentTime.substr(0, 2);
-            var lessonTimeHours = +lesson.time.substr(0, 2);
-            return lessonTimeHours >= currentTimeHours;
+    var subgroupLessons = todayLessons && todayLessons.filter(function (lesson) { return lesson.subgroup === subgroup || lesson.subgroup === 'both'; });
+    var nextSubgroupLesson = (function () {
+        var currentLesson = null;
+        var currentLessonOffsetInMinutes = 0;
+        subgroupLessons.forEach(function (lesson) {
+            var offsetInMinutes = helpers_1.getOffsetFromFormattedTimes(lesson.time, currentTime);
+            if ((currentLessonOffsetInMinutes === 0 || offsetInMinutes < currentLessonOffsetInMinutes) &&
+                offsetInMinutes >= 0) {
+                currentLessonOffsetInMinutes = offsetInMinutes;
+                currentLesson = __assign({}, lesson);
+            }
         });
-    if (lesson) {
-        helpers_1.sendMessage("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043F\u0430\u0440\u0430:" + helpers_1.formatLesson(lesson));
+        return currentLesson;
+    })();
+    if (nextSubgroupLesson) {
+        helpers_1.sendMessage("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043F\u0430\u0440\u0430 \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B:\n" + helpers_1.formatLesson(nextSubgroupLesson));
     }
     else {
-        helpers_1.sendMessage("\u041D\u0430 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u043F\u0430\u0440\u044B \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B\u0438\u0441\u044C.");
+        helpers_1.sendMessage("\u041D\u0430 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u043F\u0430\u0440\u044B \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B\u0438\u0441\u044C.");
     }
 };
 var handleActions = function () {
@@ -60,8 +69,11 @@ var handleActions = function () {
         else if (messageText.startsWith(Actions.todaySchedular)) {
             showTodaySchedular();
         }
-        else if (messageText.startsWith(Actions.nextLesson)) {
-            showNextLesson();
+        else if (messageText.startsWith(Actions.nextLessonFirstGroup)) {
+            showNextLesson(1);
+        }
+        else if (messageText.startsWith(Actions.nextLessonSecondGroup)) {
+            showNextLesson(2);
         }
     });
 };

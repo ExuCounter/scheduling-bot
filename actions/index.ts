@@ -6,6 +6,7 @@ import {
   getTodayLessons,
   subtractMinutesFromFormattedTime,
   sendUsersNotification,
+  getOffsetFromFormattedTimes,
 } from '../helpers'
 import { Lesson } from '../data/lessons'
 import { firstGroupNicknames, secondGroupNicknames } from '../data/users'
@@ -38,19 +39,30 @@ const showNextLesson = (subgroup: 1 | 2) => {
   const { currentTime } = getCurrentDate()
   const todayLessons = getTodayLessons()
 
-  const lesson =
-    todayLessons &&
-    todayLessons
-      .filter(lesson => lesson.subgroup === subgroup || lesson.subgroup === 'both')
-      .find(lesson => {
-        const currentTimeHours = +currentTime.substr(0, 2)
-        const lessonTimeHours = +lesson.time.substr(0, 2)
+  const subgroupLessons =
+    todayLessons && todayLessons.filter(lesson => lesson.subgroup === subgroup || lesson.subgroup === 'both')
 
-        return lessonTimeHours >= currentTimeHours
-      })
+  const nextSubgroupLesson = (() => {
+    let currentLesson: Lesson | null = null
+    let currentLessonOffsetInMinutes = 0
 
-  if (lesson) {
-    sendMessage(`Следующая пара у ${subgroup === 1 ? 'первой' : 'второй'} подгруппы:\n${formatLesson(lesson)}`)
+    subgroupLessons.forEach(lesson => {
+      const offsetInMinutes = getOffsetFromFormattedTimes(lesson.time, currentTime)
+      if (
+        (currentLessonOffsetInMinutes === 0 || offsetInMinutes < currentLessonOffsetInMinutes) &&
+        offsetInMinutes >= 0
+      ) {
+        currentLessonOffsetInMinutes = offsetInMinutes
+        currentLesson = { ...lesson }
+      }
+    })
+    return currentLesson
+  })()
+
+  if (nextSubgroupLesson) {
+    sendMessage(
+      `Следующая пара у ${subgroup === 1 ? 'первой' : 'второй'} подгруппы:\n${formatLesson(nextSubgroupLesson)}`
+    )
   } else {
     sendMessage(`На сегодня пары у ${subgroup === 1 ? 'первой' : 'второй'} закончились.`)
   }

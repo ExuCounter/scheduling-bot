@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onMessage = exports.sendUsersNotification = exports.sendMessage = exports.subtractMinutesFromFormattedTime = exports.addMinutesToFormattedTime = exports.minutesToFormattedTime = exports.getTodayLessons = exports.getCurrentDate = exports.formatLesson = exports.chatId = void 0;
+exports.onMessage = exports.sendUsersNotification = exports.sendMessage = exports.getOffsetFromFormattedTimes = exports.subtractMinutesFromFormattedTime = exports.addMinutesToFormattedTime = exports.formattedTimeToMinutes = exports.minutesToFormattedTime = exports.getTodayLessons = exports.getCurrentDate = exports.formatLesson = exports.chatId = void 0;
 var _a = require('date-fns-tz'), format = _a.format, utcToZonedTime = _a.utcToZonedTime;
 var isEven = require('is-even');
 var lessons_1 = require("../data/lessons");
 var bot_1 = require("../bot");
 /* PRODUCT */
-// export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
+exports.chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID;
 /* DEV */
-exports.chatId = process.env.TEST_GROUP_CHAT_ID;
+// export const chatId = process.env.TEST_GROUP_CHAT_ID
 var formatLesson = function (_a) {
     var name = _a.name, time = _a.time, link = _a.link, educator = _a.educator, subgroup = _a.subgroup;
     return "\n\u041F\u0440\u0435\u0434\u043C\u0435\u0442: " + name + "\n\u0412\u0440\u0435\u043C\u044F: " + time + "\n\u0421\u0441\u044B\u043B\u043A\u0430: " + link + "\n\u041F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u0430: " + (subgroup === 'both' ? '1 и 2' : subgroup) + "\n\u041F\u0440\u0435\u043F\u043E\u0434\u0430\u0432\u0430\u0442\u0435\u043B\u044C: " + educator + "\n";
@@ -37,18 +37,25 @@ var minutesToFormattedTime = function (totalMinutes) {
     return updatedTimeHours + ":" + (updatedTimeMinutes < 10 ? '0' : '') + updatedTimeMinutes;
 };
 exports.minutesToFormattedTime = minutesToFormattedTime;
+var formattedTimeToMinutes = function (formattedTime) {
+    var _a = formattedTime.split(':').map(function (n) { return +n; }), hh = _a[0], mm = _a[1];
+    return hh * 60 + mm;
+};
+exports.formattedTimeToMinutes = formattedTimeToMinutes;
 var addMinutesToFormattedTime = function (formattedTime, addedMinutes) {
-    var _a = formattedTime.split(':').map(function (n) { return +n; }), hours = _a[0], minutes = _a[1];
-    var totalMinutes = hours * 60 + minutes + addedMinutes;
+    var totalMinutes = exports.formattedTimeToMinutes(formattedTime) + addedMinutes;
     return exports.minutesToFormattedTime(totalMinutes);
 };
 exports.addMinutesToFormattedTime = addMinutesToFormattedTime;
 var subtractMinutesFromFormattedTime = function (formattedTime, substractedMinutes) {
-    var _a = formattedTime.split(':').map(function (n) { return +n; }), hours = _a[0], minutes = _a[1];
-    var totalMinutes = hours * 60 + minutes - substractedMinutes;
+    var totalMinutes = exports.formattedTimeToMinutes(formattedTime) - substractedMinutes;
     return exports.minutesToFormattedTime(totalMinutes);
 };
 exports.subtractMinutesFromFormattedTime = subtractMinutesFromFormattedTime;
+var getOffsetFromFormattedTimes = function (t1, t2) {
+    return exports.formattedTimeToMinutes(t1) - exports.formattedTimeToMinutes(t2);
+};
+exports.getOffsetFromFormattedTimes = getOffsetFromFormattedTimes;
 var sendMessage = function (message, options) {
     bot_1.bot.sendMessage(exports.chatId, message, options);
 };
