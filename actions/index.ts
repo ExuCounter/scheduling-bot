@@ -41,24 +41,22 @@ const showNextLesson = (subgroup: 1 | 2) => {
   const { currentTime } = getCurrentDate()
   const todayLessons = getTodayLessons()
 
-  const data =
-    todayLessons &&
-    todayLessons
-      .filter(lesson => lesson.subgroup === subgroup || lesson.subgroup === 'both')
-      .reduce(
-        (acc, lesson) => {
-          const offsetInMinutes = getOffsetFromFormattedTimes(lesson.time, currentTime)
+  const data = todayLessons
+    .filter(lesson => lesson.subgroup === subgroup || lesson.subgroup === 'both')
+    .reduce(
+      (acc, lesson) => {
+        const offsetInMinutes = getOffsetFromFormattedTimes(lesson.time, currentTime)
 
-          if ((acc.currentLessonOffset === 0 || offsetInMinutes < acc.currentLessonOffset) && offsetInMinutes >= 0) {
-            return { currentLesson: lesson, currentLessonOffset: offsetInMinutes }
-          }
-          return acc
-        },
-        <CurrentLessonWithOffset>{
-          currentLesson: null,
-          currentLessonOffset: 0,
+        if ((acc.currentLessonOffset === 0 || offsetInMinutes < acc.currentLessonOffset) && offsetInMinutes >= 0) {
+          return { currentLesson: lesson, currentLessonOffset: offsetInMinutes }
         }
-      )
+        return acc
+      },
+      <CurrentLessonWithOffset>{
+        currentLesson: null,
+        currentLessonOffset: 0,
+      }
+    )
 
   if (data.currentLesson) {
     sendMessage(
@@ -109,36 +107,34 @@ export const checkUpcomingLessons = () => {
     const { currentTime } = getCurrentDate()
     const todayLessons = getTodayLessons()
 
-    if (todayLessons) {
-      todayLessons.map(lesson => {
-        const { time: lessonTime } = lesson
-        const notificationTime = subtractMinutesFromFormattedTime(lessonTime, 5)
+    todayLessons.map(lesson => {
+      const { time: lessonTime } = lesson
+      const notificationTime = subtractMinutesFromFormattedTime(lessonTime, 5)
 
-        if (currentTime === notificationTime) {
-          if (lesson.subgroup === 1 && currentGroupsLessons.firstGroup.time !== lessonTime) {
-            sendMessage(`Через 5 минут пара у первой подгруппы :*\n${formatLesson(lesson)}`)
-            sendUsersNotification(firstGroupNicknames)
+      if (currentTime === notificationTime) {
+        if (lesson.subgroup === 1 && currentGroupsLessons.firstGroup.time !== lessonTime) {
+          sendMessage(`Через 5 минут пара у первой подгруппы :*\n${formatLesson(lesson)}`)
+          sendUsersNotification(firstGroupNicknames)
 
-            currentGroupsLessons.firstGroup = { ...lesson }
-          } else if (lesson.subgroup === 2 && currentGroupsLessons.secondGroup.time !== lessonTime) {
-            sendMessage(`Через 5 минут пара у второй подгруппы :*\n${formatLesson(lesson)}`)
-            sendUsersNotification(secondGroupNicknames)
+          currentGroupsLessons.firstGroup = { ...lesson }
+        } else if (lesson.subgroup === 2 && currentGroupsLessons.secondGroup.time !== lessonTime) {
+          sendMessage(`Через 5 минут пара у второй подгруппы :*\n${formatLesson(lesson)}`)
+          sendUsersNotification(secondGroupNicknames)
 
-            currentGroupsLessons.secondGroup = { ...lesson }
-          } else if (
-            lesson.subgroup === 'both' &&
-            currentGroupsLessons.firstGroup.time !== lessonTime &&
-            currentGroupsLessons.secondGroup.time !== lessonTime
-          ) {
-            sendMessage(`Через 5 минут пара у всей группы :*\n${formatLesson(lesson)}`)
-            sendUsersNotification(firstGroupNicknames)
-            sendUsersNotification(secondGroupNicknames)
+          currentGroupsLessons.secondGroup = { ...lesson }
+        } else if (
+          lesson.subgroup === 'both' &&
+          currentGroupsLessons.firstGroup.time !== lessonTime &&
+          currentGroupsLessons.secondGroup.time !== lessonTime
+        ) {
+          sendMessage(`Через 5 минут пара у всей группы :*\n${formatLesson(lesson)}`)
+          sendUsersNotification(firstGroupNicknames)
+          sendUsersNotification(secondGroupNicknames)
 
-            currentGroupsLessons.firstGroup = { ...lesson }
-            currentGroupsLessons.secondGroup = { ...lesson }
-          }
+          currentGroupsLessons.firstGroup = { ...lesson }
+          currentGroupsLessons.secondGroup = { ...lesson }
         }
-      })
-    }
+      }
+    })
   }, UPDATE_TIME)
 }

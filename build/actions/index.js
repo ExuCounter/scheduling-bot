@@ -39,19 +39,18 @@ var showTodaySchedular = function () {
 var showNextLesson = function (subgroup) {
     var currentTime = helpers_1.getCurrentDate().currentTime;
     var todayLessons = helpers_1.getTodayLessons();
-    var data = todayLessons &&
-        todayLessons
-            .filter(function (lesson) { return lesson.subgroup === subgroup || lesson.subgroup === 'both'; })
-            .reduce(function (acc, lesson) {
-            var offsetInMinutes = helpers_1.getOffsetFromFormattedTimes(lesson.time, currentTime);
-            if ((acc.currentLessonOffset === 0 || offsetInMinutes < acc.currentLessonOffset) && offsetInMinutes >= 0) {
-                return { currentLesson: lesson, currentLessonOffset: offsetInMinutes };
-            }
-            return acc;
-        }, {
-            currentLesson: null,
-            currentLessonOffset: 0,
-        });
+    var data = todayLessons
+        .filter(function (lesson) { return lesson.subgroup === subgroup || lesson.subgroup === 'both'; })
+        .reduce(function (acc, lesson) {
+        var offsetInMinutes = helpers_1.getOffsetFromFormattedTimes(lesson.time, currentTime);
+        if ((acc.currentLessonOffset === 0 || offsetInMinutes < acc.currentLessonOffset) && offsetInMinutes >= 0) {
+            return { currentLesson: lesson, currentLessonOffset: offsetInMinutes };
+        }
+        return acc;
+    }, {
+        currentLesson: null,
+        currentLessonOffset: 0,
+    });
     if (data.currentLesson) {
         helpers_1.sendMessage("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043F\u0430\u0440\u0430 \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B:\n" + helpers_1.formatLesson(data.currentLesson));
     }
@@ -93,33 +92,31 @@ var checkUpcomingLessons = function () {
     setInterval(function () {
         var currentTime = helpers_1.getCurrentDate().currentTime;
         var todayLessons = helpers_1.getTodayLessons();
-        if (todayLessons) {
-            todayLessons.map(function (lesson) {
-                var lessonTime = lesson.time;
-                var notificationTime = helpers_1.subtractMinutesFromFormattedTime(lessonTime, 5);
-                if (currentTime === notificationTime) {
-                    if (lesson.subgroup === 1 && currentGroupsLessons.firstGroup.time !== lessonTime) {
-                        helpers_1.sendMessage("\u0427\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 \u043F\u0430\u0440\u0430 \u0443 \u043F\u0435\u0440\u0432\u043E\u0439 \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B :*\n" + helpers_1.formatLesson(lesson));
-                        helpers_1.sendUsersNotification(users_1.firstGroupNicknames);
-                        currentGroupsLessons.firstGroup = __assign({}, lesson);
-                    }
-                    else if (lesson.subgroup === 2 && currentGroupsLessons.secondGroup.time !== lessonTime) {
-                        helpers_1.sendMessage("\u0427\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 \u043F\u0430\u0440\u0430 \u0443 \u0432\u0442\u043E\u0440\u043E\u0439 \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B :*\n" + helpers_1.formatLesson(lesson));
-                        helpers_1.sendUsersNotification(users_1.secondGroupNicknames);
-                        currentGroupsLessons.secondGroup = __assign({}, lesson);
-                    }
-                    else if (lesson.subgroup === 'both' &&
-                        currentGroupsLessons.firstGroup.time !== lessonTime &&
-                        currentGroupsLessons.secondGroup.time !== lessonTime) {
-                        helpers_1.sendMessage("\u0427\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 \u043F\u0430\u0440\u0430 \u0443 \u0432\u0441\u0435\u0439 \u0433\u0440\u0443\u043F\u043F\u044B :*\n" + helpers_1.formatLesson(lesson));
-                        helpers_1.sendUsersNotification(users_1.firstGroupNicknames);
-                        helpers_1.sendUsersNotification(users_1.secondGroupNicknames);
-                        currentGroupsLessons.firstGroup = __assign({}, lesson);
-                        currentGroupsLessons.secondGroup = __assign({}, lesson);
-                    }
+        todayLessons.map(function (lesson) {
+            var lessonTime = lesson.time;
+            var notificationTime = helpers_1.subtractMinutesFromFormattedTime(lessonTime, 5);
+            if (currentTime === notificationTime) {
+                if (lesson.subgroup === 1 && currentGroupsLessons.firstGroup.time !== lessonTime) {
+                    helpers_1.sendMessage("\u0427\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 \u043F\u0430\u0440\u0430 \u0443 \u043F\u0435\u0440\u0432\u043E\u0439 \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B :*\n" + helpers_1.formatLesson(lesson));
+                    helpers_1.sendUsersNotification(users_1.firstGroupNicknames);
+                    currentGroupsLessons.firstGroup = __assign({}, lesson);
                 }
-            });
-        }
+                else if (lesson.subgroup === 2 && currentGroupsLessons.secondGroup.time !== lessonTime) {
+                    helpers_1.sendMessage("\u0427\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 \u043F\u0430\u0440\u0430 \u0443 \u0432\u0442\u043E\u0440\u043E\u0439 \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B :*\n" + helpers_1.formatLesson(lesson));
+                    helpers_1.sendUsersNotification(users_1.secondGroupNicknames);
+                    currentGroupsLessons.secondGroup = __assign({}, lesson);
+                }
+                else if (lesson.subgroup === 'both' &&
+                    currentGroupsLessons.firstGroup.time !== lessonTime &&
+                    currentGroupsLessons.secondGroup.time !== lessonTime) {
+                    helpers_1.sendMessage("\u0427\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442 \u043F\u0430\u0440\u0430 \u0443 \u0432\u0441\u0435\u0439 \u0433\u0440\u0443\u043F\u043F\u044B :*\n" + helpers_1.formatLesson(lesson));
+                    helpers_1.sendUsersNotification(users_1.firstGroupNicknames);
+                    helpers_1.sendUsersNotification(users_1.secondGroupNicknames);
+                    currentGroupsLessons.firstGroup = __assign({}, lesson);
+                    currentGroupsLessons.secondGroup = __assign({}, lesson);
+                }
+            }
+        });
     }, UPDATE_TIME);
 };
 exports.checkUpcomingLessons = checkUpcomingLessons;

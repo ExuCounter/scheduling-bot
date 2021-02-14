@@ -147,6 +147,8 @@ exports.lessonsFirstWeek = {
             subgroup: 'both',
         },
     ],
+    saturday: [],
+    sunday: [],
 };
 exports.lessonsSecondWeek = {
     monday: [
@@ -270,4 +272,6 @@ exports.lessonsSecondWeek = {
             subgroup: 'both',
         },
     ],
+    saturday: [],
+    sunday: [],
 };

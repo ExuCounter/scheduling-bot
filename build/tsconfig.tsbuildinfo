@@ -157,8 +157,8 @@
         "affectsGlobalScope": true
       },
       "../data/lessons.ts": {
-        "version": "d56fe075fc039d66ae126729285bd51a2230a03c05ccf06c123873c2b9c098e8",
-        "signature": "8fe4d0cc8a837776befb531f859b719005e1f1d06b2ff5fc3050d05744a75996",
+        "version": "3855f170ed1fcab7b2a494b111ddc378e553d3873a51578b33e0429e5b601a96",
+        "signature": "14e76b73f55e048bbe02322e6987d911bc0da255e705c6f5715ee5cc3b1141a3",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/node/globals.d.ts": {
@@ -417,7 +417,7 @@
         "affectsGlobalScope": false
       },
       "../actions/index.ts": {
-        "version": "01d85a859108c8c0f5ff2a389997158825d687f06a14d025d0ec65480b0298a6",
+        "version": "7222f1500dd3c6dada843d8fdd03a9c63b1bc80238bf778c3a8a4935336a8202",
         "signature": "59566ddbaceec804574937a5429e58f8bf5be312f0075bd7a94629c905343038",
         "affectsGlobalScope": false
       },

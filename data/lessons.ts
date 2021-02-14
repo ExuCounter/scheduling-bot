@@ -7,7 +7,7 @@ export type Lesson = {
   subgroup: SubGroup
 }
 
-export type localDayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday'
+export type localDayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
 
 export type SubGroup = 1 | 2 | 'both'
 
@@ -162,6 +162,9 @@ export const lessonsFirstWeek: Schedular = {
       subgroup: 'both',
     },
   ],
+
+  saturday: [],
+  sunday: [],
 }
 
 export const lessonsSecondWeek: Schedular = {
@@ -286,4 +289,6 @@ export const lessonsSecondWeek: Schedular = {
       subgroup: 'both',
     },
   ],
+  saturday: [],
+  sunday: [],
 }
