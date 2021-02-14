@@ -39,25 +39,24 @@ var showTodaySchedular = function () {
 var showNextLesson = function (subgroup) {
     var currentTime = helpers_1.getCurrentDate().currentTime;
     var todayLessons = helpers_1.getTodayLessons();
-    var subgroupLessons = todayLessons && todayLessons.filter(function (lesson) { return lesson.subgroup === subgroup || lesson.subgroup === 'both'; });
-    var nextSubgroupLesson = (function () {
-        var currentLesson = null;
-        var currentLessonOffsetInMinutes = 0;
-        subgroupLessons.forEach(function (lesson) {
+    var data = todayLessons &&
+        todayLessons
+            .filter(function (lesson) { return lesson.subgroup === subgroup || lesson.subgroup === 'both'; })
+            .reduce(function (acc, lesson) {
             var offsetInMinutes = helpers_1.getOffsetFromFormattedTimes(lesson.time, currentTime);
-            if ((currentLessonOffsetInMinutes === 0 || offsetInMinutes < currentLessonOffsetInMinutes) &&
-                offsetInMinutes >= 0) {
-                currentLessonOffsetInMinutes = offsetInMinutes;
-                currentLesson = __assign({}, lesson);
+            if ((acc.currentLessonOffset === 0 || offsetInMinutes < acc.currentLessonOffset) && offsetInMinutes >= 0) {
+                return { currentLesson: lesson, currentLessonOffset: offsetInMinutes };
             }
+            return acc;
+        }, {
+            currentLesson: null,
+            currentLessonOffset: 0,
         });
-        return currentLesson;
-    })();
-    if (nextSubgroupLesson) {
-        helpers_1.sendMessage("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043F\u0430\u0440\u0430 \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B:\n" + helpers_1.formatLesson(nextSubgroupLesson));
+    if (data.currentLesson) {
+        helpers_1.sendMessage("\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0430\u044F \u043F\u0430\u0440\u0430 \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B:\n" + helpers_1.formatLesson(data.currentLesson));
     }
     else {
-        helpers_1.sendMessage("\u041D\u0430 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u043F\u0430\u0440\u044B \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B\u0438\u0441\u044C.");
+        helpers_1.sendMessage("\u041D\u0430 \u0441\u0435\u0433\u043E\u0434\u043D\u044F \u043F\u0430\u0440\u044B \u0443 " + (subgroup === 1 ? 'первой' : 'второй') + " \u043F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u044B \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u043B\u0438\u0441\u044C.");
     }
 };
 var handleActions = function () {

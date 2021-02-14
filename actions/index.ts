@@ -35,36 +35,37 @@ const showTodaySchedular = () => {
   }
 }
 
+type CurrentLessonWithOffset = { currentLesson: Lesson | null; currentLessonOffset: number }
+
 const showNextLesson = (subgroup: 1 | 2) => {
   const { currentTime } = getCurrentDate()
   const todayLessons = getTodayLessons()
 
-  const subgroupLessons =
-    todayLessons && todayLessons.filter(lesson => lesson.subgroup === subgroup || lesson.subgroup === 'both')
+  const data =
+    todayLessons &&
+    todayLessons
+      .filter(lesson => lesson.subgroup === subgroup || lesson.subgroup === 'both')
+      .reduce(
+        (acc, lesson) => {
+          const offsetInMinutes = getOffsetFromFormattedTimes(lesson.time, currentTime)
 
-  const nextSubgroupLesson = (() => {
-    let currentLesson: Lesson | null = null
-    let currentLessonOffsetInMinutes = 0
+          if ((acc.currentLessonOffset === 0 || offsetInMinutes < acc.currentLessonOffset) && offsetInMinutes >= 0) {
+            return { currentLesson: lesson, currentLessonOffset: offsetInMinutes }
+          }
+          return acc
+        },
+        <CurrentLessonWithOffset>{
+          currentLesson: null,
+          currentLessonOffset: 0,
+        }
+      )
 
-    subgroupLessons.forEach(lesson => {
-      const offsetInMinutes = getOffsetFromFormattedTimes(lesson.time, currentTime)
-      if (
-        (currentLessonOffsetInMinutes === 0 || offsetInMinutes < currentLessonOffsetInMinutes) &&
-        offsetInMinutes >= 0
-      ) {
-        currentLessonOffsetInMinutes = offsetInMinutes
-        currentLesson = { ...lesson }
-      }
-    })
-    return currentLesson
-  })()
-
-  if (nextSubgroupLesson) {
+  if (data.currentLesson) {
     sendMessage(
-      `Следующая пара у ${subgroup === 1 ? 'первой' : 'второй'} подгруппы:\n${formatLesson(nextSubgroupLesson)}`
+      `Следующая пара у ${subgroup === 1 ? 'первой' : 'второй'} подгруппы:\n${formatLesson(data.currentLesson)}`
     )
   } else {
-    sendMessage(`На сегодня пары у ${subgroup === 1 ? 'первой' : 'второй'} закончились.`)
+    sendMessage(`На сегодня пары у ${subgroup === 1 ? 'первой' : 'второй'} подгруппы закончились.`)
   }
 }
 
