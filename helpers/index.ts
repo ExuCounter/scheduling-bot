@@ -30,7 +30,7 @@ export const getCurrentDate = () => {
 
 export const getTodayLessons = (): Lesson[] => {
   const { currentLocalDay, isEvenWeek } = getCurrentDate()
-  const lessons = isEvenWeek ? lessonsSecondWeek : lessonsFirstWeek
+  const lessons = isEvenWeek ? lessonsFirstWeek : lessonsSecondWeek
   const currentDayLessons = lessons[currentLocalDay]
 
   return currentDayLessons

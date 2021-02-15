@@ -26,7 +26,7 @@ var getCurrentDate = function () {
 exports.getCurrentDate = getCurrentDate;
 var getTodayLessons = function () {
     var _a = exports.getCurrentDate(), currentLocalDay = _a.currentLocalDay, isEvenWeek = _a.isEvenWeek;
-    var lessons = isEvenWeek ? lessons_1.lessonsSecondWeek : lessons_1.lessonsFirstWeek;
+    var lessons = isEvenWeek ? lessons_1.lessonsFirstWeek : lessons_1.lessonsSecondWeek;
     var currentDayLessons = lessons[currentLocalDay];
     return currentDayLessons;
 };
