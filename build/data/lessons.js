@@ -63,6 +63,14 @@ exports.lessonsFirstWeek = {
     tuesday: [],
     wednesday: [
         {
+            name: 'Интелектуальный анализ данных ( Лекция )',
+            time: '13:00',
+            link: 'https://meet.google.com/lookup/dnz56d5rjr',
+            flat: '6.202',
+            educator: 'Куклинский А.В.',
+            subgroup: 'both',
+        },
+        {
             name: 'Проектирование информационных систем ( Лекция )',
             time: '14:40',
             link: 'https://meet.google.com/lookup/fecc4njrdd',
@@ -76,14 +84,6 @@ exports.lessonsFirstWeek = {
             link: 'https://meet.google.com/lookup/chummpwhay',
             flat: '6.302',
             educator: 'Савченко А.С.',
-            subgroup: 'both',
-        },
-        {
-            name: 'Интелектуальный анализ данных ( Лекция )',
-            time: '18:00',
-            link: 'https://meet.google.com/lookup/dnz56d5rjr',
-            flat: '6.202',
-            educator: 'Куклинский А.В.',
             subgroup: 'both',
         },
     ],

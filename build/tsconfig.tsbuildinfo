@@ -157,7 +157,7 @@
         "affectsGlobalScope": true
       },
       "../data/lessons.ts": {
-        "version": "3855f170ed1fcab7b2a494b111ddc378e553d3873a51578b33e0429e5b601a96",
+        "version": "349432dbac94a9a2cd4b4a5cea0dad3aa2bedcc63fdcff099bdff74be42c921a",
         "signature": "14e76b73f55e048bbe02322e6987d911bc0da255e705c6f5715ee5cc3b1141a3",
         "affectsGlobalScope": false
       },
