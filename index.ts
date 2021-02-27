@@ -1,12 +1,5 @@
-import { handleActions, checkUpcomingLessons } from './actions'
-import { config } from 'dotenv'
+import { Schedular } from './schedular'
 
-const listen = () => {
-  config()
-  handleActions()
-  checkUpcomingLessons()
-}
-
-listen()
-
-export {}
+const schedular = new Schedular()
+schedular.checkUpcomingLessons()
+schedular.handleActions()

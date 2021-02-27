@@ -7,9 +7,6 @@ import { bot } from '../bot'
 /* PRODUCT */
 export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 
-/* DEV */
-// export const chatId = process.env.TEST_GROUP_CHAT_ID
-
 export const formatLesson = ({ name, time, link, educator, subgroup }: Lesson): string => `
 Предмет: ${name}
 Время: ${time}
@@ -22,10 +19,11 @@ export const getCurrentDate = () => {
   const currentWeekOfYear: string = format(date, 'w')
   const currentLocalDay: localDayOfWeek = format(date, 'eeee').toLowerCase()
   const currentTime: string = format(date, 'HH:mm')
+  const isDayOff = currentLocalDay === 'sunday' || currentLocalDay === 'saturday'
   const isEvenWeek: boolean = isEven(currentWeekOfYear)
   const currentWeek = isEvenWeek ? `Первая` : `Вторая`
 
-  return { date, currentWeekOfYear, currentLocalDay, currentTime, isEvenWeek, currentWeek }
+  return { date, currentWeekOfYear, currentLocalDay, currentTime, isEvenWeek, currentWeek, isDayOff }
 }
 
 export const getTodayLessons = (): Lesson[] => {
@@ -36,28 +34,28 @@ export const getTodayLessons = (): Lesson[] => {
   return currentDayLessons
 }
 
-export const minutesToFormattedTime = (totalMinutes: number) => {
+export const minutesToFormattedTime = (totalMinutes: number): string => {
   const updatedTimeHours = Math.floor(totalMinutes / 60)
   const updatedTimeMinutes = Math.floor(totalMinutes - updatedTimeHours * 60)
   return `${updatedTimeHours}:${updatedTimeMinutes < 10 ? '0' : ''}${updatedTimeMinutes}`
 }
 
-export const formattedTimeToMinutes = (formattedTime: string) => {
+export const formattedTimeToMinutes = (formattedTime: string): number => {
   const [hh, mm] = formattedTime.split(':').map(n => +n)
   return hh * 60 + mm
 }
 
-export const addMinutesToFormattedTime = (formattedTime: string, addedMinutes: number) => {
+export const addMinutesToFormattedTime = (formattedTime: string, addedMinutes: number): string => {
   const totalMinutes = formattedTimeToMinutes(formattedTime) + addedMinutes
   return minutesToFormattedTime(totalMinutes)
 }
 
-export const subtractMinutesFromFormattedTime = (formattedTime: string, substractedMinutes: number) => {
+export const subtractMinutesFromFormattedTime = (formattedTime: string, substractedMinutes: number): string => {
   const totalMinutes = formattedTimeToMinutes(formattedTime) - substractedMinutes
   return minutesToFormattedTime(totalMinutes)
 }
 
-export const getOffsetFromFormattedTimes = (t1: string, t2: string) => {
+export const getOffsetFromFormattedTimes = (t1: string, t2: string): number => {
   return formattedTimeToMinutes(t1) - formattedTimeToMinutes(t2)
 }
 
@@ -65,13 +63,9 @@ export const sendMessage = (message: string, options?: any): void => {
   bot.sendMessage(chatId, message, options)
 }
 
-export const sendUsersNotification = (users: string[]) => {
+export const sendUsersNotification = (users: string[]): void => {
   const notificatedUsers = users.map(nickname => `<a href="@${nickname}">@${nickname}</a>`)
   setTimeout(() => {
     sendMessage(`${notificatedUsers}`, { parse_mode: 'HTML' })
   }, 150)
-}
-
-export const onMessage = (callback: Function): void => {
-  bot.on('message', (msg: any) => callback(msg))
 }

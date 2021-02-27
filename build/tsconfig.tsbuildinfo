@@ -157,8 +157,8 @@
         "affectsGlobalScope": true
       },
       "../data/lessons.ts": {
-        "version": "349432dbac94a9a2cd4b4a5cea0dad3aa2bedcc63fdcff099bdff74be42c921a",
-        "signature": "14e76b73f55e048bbe02322e6987d911bc0da255e705c6f5715ee5cc3b1141a3",
+        "version": "3affad2b7b6f0fd66c67917a30d852344c9d0df126dfaffc83a1e597b181b8b6",
+        "signature": "dfb407a8ec89200a9de7263629e99e22e8f874f967e2adcb5f747c2d6414c376",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/node/globals.d.ts": {
@@ -402,27 +402,37 @@
         "affectsGlobalScope": false
       },
       "../bot/index.ts": {
-        "version": "31fe5809f4f03dd2e649de0c78c50ee1b52b58087341c6385a37226879677480",
+        "version": "44858e6350c31dac53bbf9c6a5c214c43dce58bc8f91714f1b1bb710520ea6b7",
         "signature": "13afd185122936dcb7061a80bcfdea48729b675c80a234eeae92b41ff0731984",
         "affectsGlobalScope": false
       },
       "../helpers/index.ts": {
-        "version": "dc443104fe660307e15dc0408db2054f9e05920c38b8024cfb1d8e5e93823389",
-        "signature": "1d8b688ea5f2a92e9482eb1d9b7f3c6724c95b0b055be9b0a36e84ebfd68f740",
+        "version": "4fa9c23fe8a492833df1b73042649596f386d7d72ca72126b3ea1b5c452f3ca8",
+        "signature": "4c5d0284f1cc2a39ed3ea58dc31295f6f2bb4cabd472052619d24ed142be7e1f",
+        "affectsGlobalScope": false
+      },
+      "../data/types.ts": {
+        "version": "937afc181e111fae98f8d6b33d68e2f9407079f5b18ffb48e35761399d87f194",
+        "signature": "5367dafbc117017afe24b5f4937b4446c8a24f02b537bacf5c668d65789dc8e9",
+        "affectsGlobalScope": false
+      },
+      "../schedular/types.ts": {
+        "version": "4586e287730cec9d212b22840dc44ac4ac2fed2fed724115bb36c5c4ab227738",
+        "signature": "2b0d4ee19cbd62dcd431f41d71057e81fac300ec831d966b554f07b90bd3984d",
         "affectsGlobalScope": false
       },
       "../data/users.ts": {
-        "version": "89ec7c231db6c18ac554cd00b38dc1da72bf8ec0a23d401ce6e718d752660ffb",
-        "signature": "16f9fc54e6b268fa0459ec06d32b06d373e27ddfaf68a3605927b30f93ac7495",
+        "version": "429b7d95e48ab633f133a2982a36edbd76647411806c6bf1aee20754e9b71b90",
+        "signature": "aa80deae28fb1a8324356e27271b6ef06556a2b0c2b13a15428bffecc64e5a2c",
         "affectsGlobalScope": false
       },
-      "../actions/index.ts": {
-        "version": "7222f1500dd3c6dada843d8fdd03a9c63b1bc80238bf778c3a8a4935336a8202",
-        "signature": "59566ddbaceec804574937a5429e58f8bf5be312f0075bd7a94629c905343038",
+      "../schedular/index.ts": {
+        "version": "7f442316361aef886c0572f84c43363ff1431d7d3a7ae8bc20d859a749f21996",
+        "signature": "fe80c049fdf63607fbcf2fdf76a697515298734c6297e3fad99ddf5d98f869e1",
         "affectsGlobalScope": false
       },
       "../index.ts": {
-        "version": "a508453c8f777f6be420a44a4bcdbe705ccb1525ec07f7d7b706e19f1e0a250b",
+        "version": "80ed510b53ca1d38d09d9680af2c764ed4c396a7006ac58f288dc81e83528c48",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -476,21 +486,18 @@
       "configFilePath": "../tsconfig.json"
     },
     "referencedMap": {
-      "../actions/index.ts": [
-        "../data/lessons.ts",
-        "../data/users.ts",
-        "../helpers/index.ts"
-      ],
       "../bot/index.ts": [
         "../node_modules/dotenv/types/index.d.ts"
+      ],
+      "../data/users.ts": [
+        "../data/types.ts"
       ],
       "../helpers/index.ts": [
         "../bot/index.ts",
         "../data/lessons.ts"
       ],
       "../index.ts": [
-        "../actions/index.ts",
-        "../node_modules/dotenv/types/index.d.ts"
+        "../schedular/index.ts"
       ],
       "../node_modules/@types/node-telegram-bot-api/index.d.ts": [
         "../node_modules/@types/node/events.d.ts",
@@ -689,9 +696,22 @@
         "../node_modules/@types/node/http.d.ts",
         "../node_modules/@types/node/index.d.ts",
         "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../schedular/index.ts": [
+        "../bot/index.ts",
+        "../data/types.ts",
+        "../data/users.ts",
+        "../helpers/index.ts",
+        "../schedular/types.ts"
+      ],
+      "../schedular/types.ts": [
+        "../data/lessons.ts"
       ]
     },
     "exportedModulesMap": {
+      "../data/users.ts": [
+        "../data/types.ts"
+      ],
       "../helpers/index.ts": [
         "../data/lessons.ts"
       ],
@@ -891,12 +911,15 @@
         "../node_modules/@types/node/http.d.ts",
         "../node_modules/@types/node/index.d.ts",
         "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../schedular/types.ts": [
+        "../data/lessons.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "../actions/index.ts",
       "../bot/index.ts",
       "../data/lessons.ts",
+      "../data/types.ts",
       "../data/users.ts",
       "../helpers/index.ts",
       "../index.ts",
@@ -984,7 +1007,9 @@
       "../node_modules/typescript/lib/lib.es5.d.ts",
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../node_modules/typescript/lib/lib.scripthost.d.ts",
-      "../node_modules/typescript/lib/lib.webworker.importscripts.d.ts"
+      "../node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "../schedular/index.ts",
+      "../schedular/types.ts"
     ]
   },
   "version": "4.1.4"

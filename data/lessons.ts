@@ -11,11 +11,11 @@ export type localDayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | '
 
 export type SubGroup = 1 | 2 | 'both'
 
-export type Schedular = {
+export type SchedularList = {
   [key in localDayOfWeek]: Lesson[]
 }
 
-export const lessonsFirstWeek: Schedular = {
+export const lessonsFirstWeek: SchedularList = {
   monday: [
     {
       name: 'Специализированные компьютерные системы ( Лекция )',
@@ -167,7 +167,7 @@ export const lessonsFirstWeek: Schedular = {
   sunday: [],
 }
 
-export const lessonsSecondWeek: Schedular = {
+export const lessonsSecondWeek: SchedularList = {
   monday: [
     {
       name: 'Специализированные компьютерные системы ( Лекция )',

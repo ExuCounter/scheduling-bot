@@ -1,4 +1,6 @@
-export const firstGroupNicknames: string[] = [
+import { Users } from './types'
+
+export const firstGroupNicknames: Users = [
   'dariaa09',
   'vershniak',
   'VildKash',
@@ -9,7 +11,7 @@ export const firstGroupNicknames: string[] = [
   'RomanY24',
   'hardtosayy',
 ]
-export const secondGroupNicknames: string[] = [
+export const secondGroupNicknames: Users = [
   'oleeesy',
   'katyakatherinaa',
   'torres_f9',
