@@ -8,11 +8,11 @@ import { bot } from '../bot'
 export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 
 export const formatLesson = ({ name, time, link, educator, subgroup }: Lesson): string => `
-Предмет: ${name}
-Время: ${time}
-Ссылка: ${link}
-Подгруппа: ${subgroup === 'both' ? '1 и 2' : subgroup}
-Преподаватель: ${educator}\n`
+<i><b>Предмет</b>: ${name}
+<b>Время</b>: <u>${time}</u>
+<b>Ссылка</b>: ${link}
+<b>Подгруппа</b>: ${subgroup === 'both' ? '1 и 2' : subgroup}
+<b>Преподаватель</b>: ${educator}</i>\n`
 
 export const getCurrentDate = () => {
   const date: Date = utcToZonedTime(new Date(), 'Europe/Kiev')
@@ -60,12 +60,12 @@ export const getOffsetFromFormattedTimes = (t1: string, t2: string): number => {
 }
 
 export const sendMessage = (message: string, options?: any): void => {
-  bot.sendMessage(chatId, message, options)
+  bot.sendMessage(chatId, message, { parse_mode: 'HTML', ...options })
 }
 
 export const sendUsersNotification = (users: string[]): void => {
-  const notificatedUsers = users.map(nickname => `<a href="@${nickname}">@${nickname}</a>`)
+  const notificatedUsers = users.map(nickname => `<a href="@${nickname}">@${nickname}</a>`).join(' ')
   setTimeout(() => {
-    sendMessage(`${notificatedUsers}`, { parse_mode: 'HTML' })
-  }, 150)
+    sendMessage(`<i> /* ${notificatedUsers} */ </i>`, { parse_mode: 'HTML' })
+  }, 500)
 }

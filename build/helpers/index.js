@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendUsersNotification = exports.sendMessage = exports.getOffsetFromFormattedTimes = exports.subtractMinutesFromFormattedTime = exports.addMinutesToFormattedTime = exports.formattedTimeToMinutes = exports.minutesToFormattedTime = exports.getTodayLessons = exports.getCurrentDate = exports.formatLesson = exports.chatId = void 0;
 var _a = require('date-fns-tz'), format = _a.format, utcToZonedTime = _a.utcToZonedTime;
@@ -9,7 +20,7 @@ var bot_1 = require("../bot");
 exports.chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID;
 var formatLesson = function (_a) {
     var name = _a.name, time = _a.time, link = _a.link, educator = _a.educator, subgroup = _a.subgroup;
-    return "\n\u041F\u0440\u0435\u0434\u043C\u0435\u0442: " + name + "\n\u0412\u0440\u0435\u043C\u044F: " + time + "\n\u0421\u0441\u044B\u043B\u043A\u0430: " + link + "\n\u041F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u0430: " + (subgroup === 'both' ? '1 и 2' : subgroup) + "\n\u041F\u0440\u0435\u043F\u043E\u0434\u0430\u0432\u0430\u0442\u0435\u043B\u044C: " + educator + "\n";
+    return "\n<i><b>\u041F\u0440\u0435\u0434\u043C\u0435\u0442</b>: " + name + "\n<b>\u0412\u0440\u0435\u043C\u044F</b>: <u>" + time + "</u>\n<b>\u0421\u0441\u044B\u043B\u043A\u0430</b>: " + link + "\n<b>\u041F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u0430</b>: " + (subgroup === 'both' ? '1 и 2' : subgroup) + "\n<b>\u041F\u0440\u0435\u043F\u043E\u0434\u0430\u0432\u0430\u0442\u0435\u043B\u044C</b>: " + educator + "</i>\n";
 };
 exports.formatLesson = formatLesson;
 var getCurrentDate = function () {
@@ -56,13 +67,13 @@ var getOffsetFromFormattedTimes = function (t1, t2) {
 };
 exports.getOffsetFromFormattedTimes = getOffsetFromFormattedTimes;
 var sendMessage = function (message, options) {
-    bot_1.bot.sendMessage(exports.chatId, message, options);
+    bot_1.bot.sendMessage(exports.chatId, message, __assign({ parse_mode: 'HTML' }, options));
 };
 exports.sendMessage = sendMessage;
 var sendUsersNotification = function (users) {
-    var notificatedUsers = users.map(function (nickname) { return "<a href=\"@" + nickname + "\">@" + nickname + "</a>"; });
+    var notificatedUsers = users.map(function (nickname) { return "<a href=\"@" + nickname + "\">@" + nickname + "</a>"; }).join(' ');
     setTimeout(function () {
-        exports.sendMessage("" + notificatedUsers, { parse_mode: 'HTML' });
-    }, 150);
+        exports.sendMessage("<i> /* " + notificatedUsers + " */ </i>", { parse_mode: 'HTML' });
+    }, 500);
 };
 exports.sendUsersNotification = sendUsersNotification;

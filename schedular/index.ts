@@ -30,16 +30,16 @@ export class Schedular {
   private doesMorningNotificated = false
   private showCurrentWeek() {
     const { currentWeek } = getCurrentDate()
-    sendMessage(`Текущая неделя по расписанию: ${currentWeek}`)
+    sendMessage(`<i>Текущая неделя по расписанию:\n<b>${currentWeek}</b></i>`)
   }
   private showTodaySchedular = () => {
     const todayLessons = getTodayLessons()
-    const todaySchedular = todayLessons && todayLessons.map(formatLesson)
+    const todaySchedular = todayLessons && todayLessons.map(formatLesson).join(' ')
 
     if (todaySchedular.length > 0) {
-      sendMessage(`Расписание на сегодня:\n${todaySchedular}`)
+      sendMessage(`<i><b>Расписание на сегодня:</b></i>\n${todaySchedular}`)
     } else {
-      sendMessage(`Расписания нету - сегодня выходной.`)
+      sendMessage(`<i><b>Расписания нету - сегодня выходной.</b></i>`)
     }
   }
   private showNextLesson(subgroup: SubGroup) {
@@ -65,9 +65,9 @@ export class Schedular {
       )
 
     if (data.currentLesson) {
-      sendMessage(`Следующая пара у ${groupName} подгруппы:\n${formatLesson(data.currentLesson)}`)
+      sendMessage(`<i>Следующая пара у <b><u>${groupName}</u></b> подгруппы:</i>\n${formatLesson(data.currentLesson)}`)
     } else {
-      sendMessage(`На сегодня пары у ${groupName} подгруппы закончились.`)
+      sendMessage(`<i>На сегодня пары у <b><u>${groupName}</u></b> подгруппы закончились.</i>`)
     }
   }
   public handleActions() {
@@ -94,21 +94,25 @@ export class Schedular {
 
         if (currentTime === notificationTime) {
           if (lesson.subgroup === 1 && this.currentGroupsLessons.firstGroup.time !== lessonTime) {
-            sendMessage(`Через 5 минут пара у первой подгруппы \n${formatLesson(lesson)}`)
-            sendUsersNotification(firstGroupNicknames)
+            setTimeout(() => {
+              sendMessage(`<i>Через 5 минут пара у <b><u>первой</u></b> подгруппы</i> \n${formatLesson(lesson)}`)
+              sendUsersNotification(firstGroupNicknames)
 
-            this.currentGroupsLessons.firstGroup = { ...lesson }
+              this.currentGroupsLessons.firstGroup = { ...lesson }
+            }, 2000)
           } else if (lesson.subgroup === 2 && this.currentGroupsLessons.secondGroup.time !== lessonTime) {
-            sendMessage(`Через 5 минут пара у второй подгруппы \n${formatLesson(lesson)}`)
-            sendUsersNotification(secondGroupNicknames)
+            setTimeout(() => {
+              sendMessage(`<i>Через 5 минут пара у <b><u>второй</u></b> подгруппы</i> \n${formatLesson(lesson)}`)
+              sendUsersNotification(secondGroupNicknames)
 
-            this.currentGroupsLessons.secondGroup = { ...lesson }
+              this.currentGroupsLessons.secondGroup = { ...lesson }
+            }, 5000)
           } else if (
             lesson.subgroup === 'both' &&
             this.currentGroupsLessons.firstGroup.time !== lessonTime &&
             this.currentGroupsLessons.secondGroup.time !== lessonTime
           ) {
-            sendMessage(`Через 5 минут пара у всей группы :*\n${formatLesson(lesson)}`)
+            sendMessage(`<i>Через 5 минут пара у <b><u>всей</u></b> группы</i> \n${formatLesson(lesson)}`)
             sendUsersNotification(firstGroupNicknames)
             sendUsersNotification(secondGroupNicknames)
 
