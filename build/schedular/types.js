@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Actions = void 0;
-var Actions;
-(function (Actions) {
-    Actions["currentWeekNumber"] = "/sch_current_week_number";
-    Actions["todaySchedular"] = "/sch_today";
-    Actions["nextLessonFirstGroup"] = "/sch_next_lesson_first_group";
-    Actions["nextLessonSecondGroup"] = "/sch_next_lesson_second_group";
-})(Actions = exports.Actions || (exports.Actions = {}));
+exports.BotActions = void 0;
+var BotActions;
+(function (BotActions) {
+    BotActions["currentWeekNumber"] = "/sch_current_week_number";
+    BotActions["todaySchedular"] = "/sch_today";
+    BotActions["nextLessonFirstGroup"] = "/sch_next_lesson_first_group";
+    BotActions["nextLessonSecondGroup"] = "/sch_next_lesson_second_group";
+})(BotActions = exports.BotActions || (exports.BotActions = {}));

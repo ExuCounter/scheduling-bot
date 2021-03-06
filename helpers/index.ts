@@ -1,10 +1,9 @@
 const { format, utcToZonedTime } = require('date-fns-tz')
 const isEven = require('is-even')
 
-import { Lesson, localDayOfWeek, lessonsSecondWeek, lessonsFirstWeek } from '../data/lessons'
+import { Lesson, localDayOfWeek, SchedularLessons } from '../data/types'
 import { bot } from '../bot'
 
-/* PRODUCT */
 export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 
 export const formatLesson = ({ name, time, link, educator, subgroup }: Lesson): string => `
@@ -19,17 +18,16 @@ export const getCurrentDate = () => {
   const currentWeekOfYear: string = format(date, 'w')
   const currentLocalDay: localDayOfWeek = format(date, 'eeee').toLowerCase()
   const currentTime: string = format(date, 'HH:mm')
-  const isDayOff = currentLocalDay === 'sunday' || currentLocalDay === 'saturday'
   const isEvenWeek: boolean = isEven(currentWeekOfYear)
   const currentWeek = isEvenWeek ? `Первая` : `Вторая`
 
-  return { date, currentWeekOfYear, currentLocalDay, currentTime, isEvenWeek, currentWeek, isDayOff }
+  return { date, currentWeekOfYear, currentLocalDay, currentTime, isEvenWeek, currentWeek }
 }
 
-export const getTodayLessons = (): Lesson[] => {
+export const getTodayLessons = (lessons: SchedularLessons): Lesson[] => {
   const { currentLocalDay, isEvenWeek } = getCurrentDate()
-  const lessons = isEvenWeek ? lessonsFirstWeek : lessonsSecondWeek
-  const currentDayLessons = lessons[currentLocalDay]
+  const currentWeekLessons = isEvenWeek ? lessons.firstWeek : lessons.secondWeek
+  const currentDayLessons = currentWeekLessons[currentLocalDay]
 
   return currentDayLessons
 }

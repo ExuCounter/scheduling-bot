@@ -1,21 +1,6 @@
-export type Lesson = {
-  name: string
-  time: string
-  link: string
-  flat: string
-  educator: string
-  subgroup: SubGroup
-}
+import { SchedularWeekLessons, SchedularLessons } from './types'
 
-export type localDayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
-
-export type SubGroup = 1 | 2 | 'both'
-
-export type SchedularList = {
-  [key in localDayOfWeek]: Lesson[]
-}
-
-export const lessonsFirstWeek: SchedularList = {
+export const firstWeek: SchedularWeekLessons = {
   monday: [
     {
       name: 'Специализированные компьютерные системы ( Лекция )',
@@ -167,7 +152,7 @@ export const lessonsFirstWeek: SchedularList = {
   sunday: [],
 }
 
-export const lessonsSecondWeek: SchedularList = {
+export const secondWeek: SchedularWeekLessons = {
   monday: [
     {
       name: 'Специализированные компьютерные системы ( Лекция )',
@@ -291,4 +276,9 @@ export const lessonsSecondWeek: SchedularList = {
   ],
   saturday: [],
   sunday: [],
+}
+
+export const lessonsData: SchedularLessons = {
+  firstWeek,
+  secondWeek,
 }

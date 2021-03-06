@@ -9,6 +9,8 @@ export type Lesson = {
 
 export type localDayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'
 
+export type lessonsWeeks = 'firstWeek' | 'secondWeek'
+
 export type SubGroup = 1 | 2 | 'both'
 
 export type Schedular = {
@@ -16,3 +18,11 @@ export type Schedular = {
 }
 
 export type Users = string[]
+
+export type SchedularLessons = {
+  [key in lessonsWeeks]: SchedularWeekLessons
+}
+
+export type SchedularWeekLessons = {
+  [key in localDayOfWeek]: Lesson[]
+}

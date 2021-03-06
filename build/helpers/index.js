@@ -14,9 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendUsersNotification = exports.sendMessage = exports.getOffsetFromFormattedTimes = exports.subtractMinutesFromFormattedTime = exports.addMinutesToFormattedTime = exports.formattedTimeToMinutes = exports.minutesToFormattedTime = exports.getTodayLessons = exports.getCurrentDate = exports.formatLesson = exports.chatId = void 0;
 var _a = require('date-fns-tz'), format = _a.format, utcToZonedTime = _a.utcToZonedTime;
 var isEven = require('is-even');
-var lessons_1 = require("../data/lessons");
 var bot_1 = require("../bot");
-/* PRODUCT */
 exports.chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID;
 var formatLesson = function (_a) {
     var name = _a.name, time = _a.time, link = _a.link, educator = _a.educator, subgroup = _a.subgroup;
@@ -28,16 +26,15 @@ var getCurrentDate = function () {
     var currentWeekOfYear = format(date, 'w');
     var currentLocalDay = format(date, 'eeee').toLowerCase();
     var currentTime = format(date, 'HH:mm');
-    var isDayOff = currentLocalDay === 'sunday' || currentLocalDay === 'saturday';
     var isEvenWeek = isEven(currentWeekOfYear);
     var currentWeek = isEvenWeek ? "\u041F\u0435\u0440\u0432\u0430\u044F" : "\u0412\u0442\u043E\u0440\u0430\u044F";
-    return { date: date, currentWeekOfYear: currentWeekOfYear, currentLocalDay: currentLocalDay, currentTime: currentTime, isEvenWeek: isEvenWeek, currentWeek: currentWeek, isDayOff: isDayOff };
+    return { date: date, currentWeekOfYear: currentWeekOfYear, currentLocalDay: currentLocalDay, currentTime: currentTime, isEvenWeek: isEvenWeek, currentWeek: currentWeek };
 };
 exports.getCurrentDate = getCurrentDate;
-var getTodayLessons = function () {
+var getTodayLessons = function (lessons) {
     var _a = exports.getCurrentDate(), currentLocalDay = _a.currentLocalDay, isEvenWeek = _a.isEvenWeek;
-    var lessons = isEvenWeek ? lessons_1.lessonsFirstWeek : lessons_1.lessonsSecondWeek;
-    var currentDayLessons = lessons[currentLocalDay];
+    var currentWeekLessons = isEvenWeek ? lessons.firstWeek : lessons.secondWeek;
+    var currentDayLessons = currentWeekLessons[currentLocalDay];
     return currentDayLessons;
 };
 exports.getTodayLessons = getTodayLessons;

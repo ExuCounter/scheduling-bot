@@ -1,6 +1,6 @@
-import { Lesson } from '../data/lessons'
+import { Lesson } from '../data/types'
 
-export enum Actions {
+export enum BotActions {
   currentWeekNumber = '/sch_current_week_number',
   todaySchedular = '/sch_today',
   nextLessonFirstGroup = '/sch_next_lesson_first_group',
@@ -11,6 +11,6 @@ export type CurrentLessonWithOffset = { currentLesson: Lesson | null; currentLes
 
 export type Groups = 'firstGroup' | 'secondGroup'
 
-export type CurrentGroupsLessons = {
+export type LiveGroupLessons = {
   [x in Groups]: Lesson
 }

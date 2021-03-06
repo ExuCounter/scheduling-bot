@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lessonsSecondWeek = exports.lessonsFirstWeek = void 0;
-exports.lessonsFirstWeek = {
+exports.lessonsData = exports.secondWeek = exports.firstWeek = void 0;
+exports.firstWeek = {
     monday: [
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
@@ -150,7 +150,7 @@ exports.lessonsFirstWeek = {
     saturday: [],
     sunday: [],
 };
-exports.lessonsSecondWeek = {
+exports.secondWeek = {
     monday: [
         {
             name: 'Специализированные компьютерные системы ( Лекция )',
@@ -274,4 +274,8 @@ exports.lessonsSecondWeek = {
     ],
     saturday: [],
     sunday: [],
+};
+exports.lessonsData = {
+    firstWeek: exports.firstWeek,
+    secondWeek: exports.secondWeek,
 };
