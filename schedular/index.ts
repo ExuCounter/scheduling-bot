@@ -46,7 +46,9 @@ export class Schedular {
     if (todaySchedular.length > 0) {
       sendMessage(`<i><b>Расписание на сегодня:</b></i>\n${todaySchedular}`)
     } else {
-      sendMessage(`<i><b>Расписания нету - сегодня выходной.</b></i>`)
+      sendMessage(
+        `<i><b>Сегодня пар нету</b></i>.\nЭто значит, что сегодня или выходной, или вторник про который я вечно забываю.`
+      )
     }
   }
 
