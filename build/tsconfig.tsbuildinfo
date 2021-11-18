@@ -157,8 +157,8 @@
         "affectsGlobalScope": true
       },
       "../data/types.ts": {
-        "version": "ccc800a2f9de2165d20028680f0cb1d354168ea5d753cba313e5c943bf9ab60e",
-        "signature": "0a984b101dad6ac4bfe3e33838a2b7790e72a704cc5fe3b7c30c1470ba243264",
+        "version": "eb6291d0aac0498f46432fe6bbdf93b1fb160daa07b37b57f8202c4d888a87d0",
+        "signature": "9c415ffd97a38acfdf8e060d087ecdd0c227130b20419894be7ebefb93bdfeb8",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/node/globals.d.ts": {
@@ -407,7 +407,7 @@
         "affectsGlobalScope": false
       },
       "../helpers/index.ts": {
-        "version": "a4f063f77874bd3433414652bb76bd7ec21a1cf6258a129384058ea561214911",
+        "version": "b12398b52ffc4e17a9134edcf04680eadced9646e6b7e22dba71ebe3aaec8acb",
         "signature": "b280c8213e68bb25a5ce5be11c0507bb671f5c5c1d241b37d82d7c36c937fe65",
         "affectsGlobalScope": false
       },
@@ -417,7 +417,7 @@
         "affectsGlobalScope": false
       },
       "../data/users.ts": {
-        "version": "429b7d95e48ab633f133a2982a36edbd76647411806c6bf1aee20754e9b71b90",
+        "version": "c0e322e435f979bf0680e787169268d66c3b09b46c14dabbdbdbb1c3d16d5f02",
         "signature": "aa80deae28fb1a8324356e27271b6ef06556a2b0c2b13a15428bffecc64e5a2c",
         "affectsGlobalScope": false
       },
@@ -427,7 +427,7 @@
         "affectsGlobalScope": false
       },
       "../data/lessons.ts": {
-        "version": "49136b6d6b8e0784be08b5bf64a1b50c02c46132e1f752f411af91a2e2d0a85d",
+        "version": "65a7bb7f63e1440af27925d8f348a879d67d6e64c7afe305bbbfaf98743f728c",
         "signature": "f4714d6c37c83163c23ad7a859e9c0256cdc6997ee40a22b1c55015b9dbcf56e",
         "affectsGlobalScope": false
       },
@@ -909,7 +909,8 @@
         "../node_modules/@types/node/stream.d.ts",
         "../node_modules/@types/node/tls.d.ts",
         "../node_modules/@types/node/url.d.ts",
-        "../node_modules/@types/tough-cookie/index.d.ts"
+        "../node_modules/@types/tough-cookie/index.d.ts",
+        "../node_modules/form-data/index.d.ts"
       ],
       "../node_modules/dotenv/types/index.d.ts": [
         "../node_modules/@types/node/index.d.ts"

@@ -7,11 +7,11 @@ import { bot } from '../bot'
 export const chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID
 
 export const formatLesson = ({ name, time, link, educator, subgroup }: Lesson): string => `
-<i><b>Предмет</b>: ${name}
-<b>Время</b>: <u>${time}</u>
-<b>Ссылка</b>: ${link}
-<b>Подгруппа</b>: ${subgroup === 'both' ? '1 и 2' : subgroup}
-<b>Преподаватель</b>: ${educator}</i>\n`
+<i>Предмет: ${name}
+Время: <u>${time}</u>
+Ссылка: ${link || '<strike>утеряна в пучинах классрума</strike>'}
+Подгруппа: ${subgroup === 'both' ? '1 и 2' : subgroup}
+Преподаватель: ${educator || '<strike>желает оставаться анонимным</strike>'}</i>\n`
 
 export const getCurrentDate = () => {
   const date: Date = utcToZonedTime(new Date(), 'Europe/Kiev')

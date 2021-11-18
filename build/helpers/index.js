@@ -18,7 +18,7 @@ var bot_1 = require("../bot");
 exports.chatId = process.env.NODE_ENV === 'production' ? process.env.GROUP_CHAT_ID : process.env.TEST_GROUP_CHAT_ID;
 var formatLesson = function (_a) {
     var name = _a.name, time = _a.time, link = _a.link, educator = _a.educator, subgroup = _a.subgroup;
-    return "\n<i><b>\u041F\u0440\u0435\u0434\u043C\u0435\u0442</b>: " + name + "\n<b>\u0412\u0440\u0435\u043C\u044F</b>: <u>" + time + "</u>\n<b>\u0421\u0441\u044B\u043B\u043A\u0430</b>: " + link + "\n<b>\u041F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u0430</b>: " + (subgroup === 'both' ? '1 и 2' : subgroup) + "\n<b>\u041F\u0440\u0435\u043F\u043E\u0434\u0430\u0432\u0430\u0442\u0435\u043B\u044C</b>: " + educator + "</i>\n";
+    return "\n<i>\u041F\u0440\u0435\u0434\u043C\u0435\u0442: " + name + "\n\u0412\u0440\u0435\u043C\u044F: <u>" + time + "</u>\n\u0421\u0441\u044B\u043B\u043A\u0430: " + (link || '<strike>утеряна в пучинах классрума</strike>') + "\n\u041F\u043E\u0434\u0433\u0440\u0443\u043F\u043F\u0430: " + (subgroup === 'both' ? '1 и 2' : subgroup) + "\n\u041F\u0440\u0435\u043F\u043E\u0434\u0430\u0432\u0430\u0442\u0435\u043B\u044C: " + (educator || '<strike>желает оставаться анонимным</strike>') + "</i>\n";
 };
 exports.formatLesson = formatLesson;
 var getCurrentDate = function () {
