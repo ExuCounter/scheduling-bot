@@ -1,9 +1,9 @@
 export type Lesson = {
   name: string
   time: string
-  link: string
-  flat: string
-  educator: string
+  link?: string
+  flat?: string
+  educator?: string
   subgroup: SubGroup
 }
 
