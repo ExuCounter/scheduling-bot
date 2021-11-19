@@ -47,6 +47,7 @@ var Schedular = /** @class */ (function () {
         this.checkUpcomingLessons = function () {
             setInterval(function () {
                 var currentTime = helpers_1.getCurrentDate().currentTime;
+                console.log(currentTime);
                 var todayLessons = helpers_1.getTodayLessons(_this.schedularLessons);
                 todayLessons.map(function (lesson) {
                     var lessonTime = lesson.time;

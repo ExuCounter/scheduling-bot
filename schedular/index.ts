@@ -99,6 +99,7 @@ export class Schedular {
   public checkUpcomingLessons = () => {
     setInterval(() => {
       const { currentTime } = getCurrentDate()
+      console.log(currentTime)
       const todayLessons = getTodayLessons(this.schedularLessons)
 
       todayLessons.map(lesson => {
